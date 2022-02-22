@@ -1,23 +1,38 @@
-name: GitHub Actions Demo
-on: [push]
+name: Build
+on: [push, pull_request]
+
 jobs:
-  build_windows:
+  build_on_linux:
     runs-on: ubuntu-latest
-    container: electronuserland/builder:wine
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: Install dependencies
-        run: yarn
-      - run: mkdir ~/docker-data/wine
-      - name: Run yarn swag command
-        run: yarn make -p win32
-  build_macos:
-    runs-on: ubuntu-latest
-    container: electronuserland/builder:wine
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: yarn
+    - name: Bundle/Compile Javascript
+      run: yarn build
+    - name: Build
+      run: yarn make
+
+  build_on_mac:
+    runs-on: macos-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: mkdir ~/docker-data/wine
-      - name: Run yarn swag command
-        run: "yarn make -p darwin"
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: yarn
+    - name: Bundle/Compile Javascript
+      run: yarn build
+    - name: Build
+      run: yarn make
+    - run: ls
+
+  build_on_win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: yarn
+    - name: Bundle/Compile Javascript
+      run: yarn build
+    - name: Build
+      run: yarn make
+    - run: ls

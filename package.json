@@ -7,11 +7,10 @@
   "scripts": {
     "start": "tsc && electron-forge start",
     "package": "electron-forge package",
-    "premake": "tsc",
+    "build": "tsc",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts .",
-    "swag": "echo 'YOLO SWAGGY'"
+    "lint": "eslint --ext .ts ."
   },
   "keywords": [],
   "author": {
