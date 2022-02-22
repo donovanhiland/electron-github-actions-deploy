@@ -7,8 +7,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn
       - name: Run yarn swag command
-        run: yarn make -w
+        run: yarn make -p win32
   build_macos:
     runs-on: ubuntu-latest
     container: electronuserland/builder:wine
@@ -16,5 +18,4 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Run yarn swag command
-        run: "yarn make"
-      - run: ls
+        run: "yarn make -p darwin"
