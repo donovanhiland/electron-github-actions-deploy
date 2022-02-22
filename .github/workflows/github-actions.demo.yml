@@ -7,47 +7,19 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-        arch: [x86, x64]
-        include:
-          - os: windows-latest
-            arch: [x86, x64]
 
     steps:
-      - run: echo ${{ matrix.os }}
-      - run: echo ${{ matrix.arch }}
-
-  # build_on_linux:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - uses: actions/setup-node@master
-  #     with:
-  #       node-version: 14
-  #   - name: install dependencies
-  #     run: npm install
-  #   - name: build
-  #     run: npm run make
-
-  # build_on_mac:
-  #   runs-on: macos-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - uses: actions/setup-node@master
-  #     with:
-  #       node-version: 14
-  #   - name: install dependencies
-  #     run: npm install
-  #   - name: build
-  #     run: npm run make
-
-  # build_on_win:
-  #   runs-on: windows-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - uses: actions/setup-node@master
-  #     with:
-  #       node-version: 14
-  #   - name: install dependencies
-  #     run: npm install
-  #   - name: build
-  #     run: npm run make
+      - name: Starting workflow for ${{ matrix.os }}
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: yarn install
+      - name: bundle javascript
+        run: yarn tsc
+      - name: build
+        run: yarn run make
+      - run: ls
+      - run: ls out
+      - uses: actions/upload-artifact@v2
+        with:
+          name: builds
+          path: out/**/*.zip
