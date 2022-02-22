@@ -3,17 +3,17 @@ on: push
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        channel: [Windows]
-        targetPlatform: [x86, x64]
+        os: [macos-latest, windows-latest, ubuntu-latest]
         include:
-          - channel: Windows
-            os: windows-latest
+          - os: windows-latest
+            arch: [x86, x64]
 
-    runs-on: {{ matrix.os }}
     steps:
-      - run: echo {{ matrix.targetPlatform }}
+      - run: echo {{ matrix.os }}
+      - run: echo {{ matrix.arch }}
 
   # build_on_linux:
   #   runs-on: ubuntu-latest
