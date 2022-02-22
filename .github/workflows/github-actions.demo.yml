@@ -12,8 +12,8 @@ jobs:
             arch: [x86, x64]
 
     steps:
-      - run: echo {{ matrix.os }}
-      - run: echo {{ matrix.arch }}
+      - run: echo ${{ matrix.os }}
+      - run: echo ${{ matrix.arch }}
 
   # build_on_linux:
   #   runs-on: ubuntu-latest
