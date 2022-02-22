@@ -1,38 +1,52 @@
 name: Build
-on: [push, pull_request]
+on: push
 
 jobs:
-  build_on_linux:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: yarn
-    - name: Bundle/Compile Javascript
-      run: yarn build
-    - name: Build
-      run: yarn make
+  build:
+    strategy:
+      matrix:
+        channel: [Windows]
+        targetPlatform: [x86, x64]
+        include:
+          - channel: Windows
+            os: windows-latest
 
-  build_on_mac:
-    runs-on: macos-latest
+    runs-on: {{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: yarn
-    - name: Bundle/Compile Javascript
-      run: yarn build
-    - name: Build
-      run: yarn make
-    - run: ls
+      - run: echo {{ matrix.targetPlatform }}
 
-  build_on_win:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: yarn
-    - name: Bundle/Compile Javascript
-      run: yarn build
-    - name: Build
-      run: yarn make
-    - run: ls
+  # build_on_linux:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions/setup-node@master
+  #     with:
+  #       node-version: 14
+  #   - name: install dependencies
+  #     run: npm install
+  #   - name: build
+  #     run: npm run make
+
+  # build_on_mac:
+  #   runs-on: macos-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions/setup-node@master
+  #     with:
+  #       node-version: 14
+  #   - name: install dependencies
+  #     run: npm install
+  #   - name: build
+  #     run: npm run make
+
+  # build_on_win:
+  #   runs-on: windows-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions/setup-node@master
+  #     with:
+  #       node-version: 14
+  #   - name: install dependencies
+  #     run: npm install
+  #   - name: build
+  #     run: npm run make
