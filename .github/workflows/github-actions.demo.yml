@@ -17,10 +17,9 @@ jobs:
         run: yarn tsc
       - name: build
         run: yarn run make
-      - run: ls
-      - run: ls out
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: builds
-          path: out/**/*.zip
+      # - run: ls
+      # - run: ls out
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: builds
+      #     path: out/**/*.zip
