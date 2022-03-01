@@ -10,6 +10,7 @@ jobs:
 
     steps:
       - name: Starting workflow for ${{ matrix.os }}
+        run: echo ${{ matrix.os }}
       - uses: actions/checkout@v2
       - name: install dependencies
         run: yarn install
@@ -17,9 +18,9 @@ jobs:
         run: yarn tsc
       - name: build
         run: yarn run make
-      # - run: ls
-      # - run: ls out
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: builds
-      #     path: out/**/*.zip
+      - run: ls
+      - run: ls out
+      - uses: actions/upload-artifact@v2
+        with:
+          name: builds
+          path: out/**/*.zip
