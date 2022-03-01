@@ -17,9 +17,11 @@ jobs:
       - name: bundle javascript
         run: yarn tsc
       - name: build
-        run: yarn run make
+        run: yarn make
       - run: ls
       - run: ls out
+      - run: tree out
+      - run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
       - uses: actions/upload-artifact@v2
         with:
           name: builds
