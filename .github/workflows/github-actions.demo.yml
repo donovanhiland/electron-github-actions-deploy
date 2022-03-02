@@ -18,9 +18,7 @@ jobs:
         run: yarn tsc
       - name: build
         run: yarn make
-      - run: ls
-      - run: ls out
-      - run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+      - run: ls out/make
       - uses: actions/upload-artifact@v2
         with:
           name: builds
