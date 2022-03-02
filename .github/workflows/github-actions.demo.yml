@@ -1,0 +1,29 @@
+name: Build
+on: push
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+
+    steps:
+      - name: Starting workflow for ${{ matrix.os }}
+        run: echo ${{ matrix.os }}
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: yarn install
+      - name: bundle javascript
+        run: yarn tsc
+      - name: build
+        run: yarn make
+      - run: ls out/make
+      - uses: actions/upload-artifact@v2
+        with:
+          path: |
+            out/make/**/*.zip
+            out/make/**/*.exe
+            out/make/**/*.dmg
+            out/make/**/*.rpm
+            out/make/**/*.deb
