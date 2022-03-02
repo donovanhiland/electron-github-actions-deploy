@@ -23,8 +23,8 @@ jobs:
         with:
           name: builds
           path: |
-            out/make/*.zip
-            out/make/*.exe
-            out/make/*.dmg
-            out/make/*.rpm
-            out/make/*.deb
+            out/make/**/*.zip
+            out/make/**/*.exe
+            out/make/**/*.dmg
+            out/make/**/*.rpm
+            out/make/**/*.deb
